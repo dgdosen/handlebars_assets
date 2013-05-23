@@ -30,7 +30,8 @@ module HandlebarsAssets
                  data
                end
 
-      if HandlebarsAssets::Config.ember?
+      if HandlebarsAssets::Config.ember? || scope.pathname.to_s.include?(".ember")
+
         "window.Ember.TEMPLATES[#{template_path.name}] = Ember.Handlebars.compile(#{MultiJson.dump source});"
       else
         compiled_hbs = Handlebars.precompile(source, HandlebarsAssets::Config.options)
